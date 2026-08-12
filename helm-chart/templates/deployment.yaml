@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: samplehello-deployment
+  labels:
+    app: samplehello
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: samplehello
+  template:
+    metadata:
+      labels:
+        app: samplehello
+    spec:
+      containers:
+        - name: samplehello-container
+          image: zhenzongchoo/samplehello:latest
+          ports:
+            - containerPort: 8080
+          envFrom:
+            - secretRef:
+                name: postgres-secret
+            - configMapRef:
+                name: postgres-config
+          livenessProbe:
+            httpGet:
+              path: /hello
+              port: 8080
+            initialDelaySeconds: 10
+            periodSeconds: 10
+          readinessProbe:
+            httpGet:
+              path: /hello
+              port: 8080
+            initialDelaySeconds: 5
+            periodSeconds: 5
+          resources:
+            requests:
+              cpu: 250m
+              memory: 256Mi
+            limits:
+              cpu: 500m
+              memory: 512Mi

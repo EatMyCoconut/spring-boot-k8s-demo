@@ -1,0 +1,23 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: samplehello-ingress
+spec:
+  ingressClassName: nginx
+  rules:
+    - http:
+        paths:
+          - path: /hello
+            pathType: Prefix
+            backend:
+              service:
+                name: samplehello-service
+                port:
+                  number: 8080
+          - path: /echo
+            pathType: Prefix
+            backend:
+              service:
+                name: toy-service
+                port:
+                  number: 5678

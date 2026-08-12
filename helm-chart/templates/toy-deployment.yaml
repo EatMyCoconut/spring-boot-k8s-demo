@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: toy-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: toy
+  template:
+    metadata:
+      labels:
+        app: toy
+    spec:
+      containers:
+        - name: toy
+          image: hashicorp/http-echo
+          args:
+            - "-text=Hello from the TOY service!"
+          ports:
+            - containerPort: 5678

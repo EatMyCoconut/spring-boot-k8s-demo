@@ -33,3 +33,4 @@ build/
 .vscode/
 
 k8s/postgres-secret.yaml
+helm-chart/templates/postgres-secret.yaml
