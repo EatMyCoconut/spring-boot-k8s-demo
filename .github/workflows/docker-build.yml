@@ -28,6 +28,6 @@ jobs:
 
       - name: Build and push Docker image
         run: |
-          docker build -t zhenzongchoo/samplehello:${{ github.sha }} .
+          docker build -t zhenzongchoo/samplehello:latest -t zhenzongchoo/samplehello:${{ github.sha }} .
           docker push zhenzongchoo/samplehello:latest
-          docker push zhenzongcho/samplehello:${{ github.sha }}
+          docker push zhenzongchoo/samplehello:${{ github.sha }}
